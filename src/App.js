@@ -84,6 +84,15 @@ newRandomCard = listId => {
   }
   
   clickDelete = cardId => {
+    let itemsToFilter = this.state.lists;
+    for (let i = 0; i < itemsToFilter.length; i++) {
+      let indexNumber = itemsToFilter[i].cardIds.findIndex(cardId);
+      let newCardIds = itemsToFilter[i].cardIds
+      newCardIds = itemsToFilter[i].cardIds.filter((item, index) => index !== indexNumber);
+      this.setState({newCardIds});
+    }
+    this.omit(this.state.allCards, cardId)
+
   //   const {lists, allCards} = this.state.store;
   //   const newLists = lists.map(list => ({
   //     ...list, 
@@ -96,7 +105,7 @@ newRandomCard = listId => {
   //         allCards: newCards
   //       }
   //     })
-  // };
+  };
 
   
 
