@@ -66,9 +66,6 @@ newRandomCard = listId => {
     console.log(listId)
     lists[indexOf].cardIds = [...this.state.lists[indexOf].cardIds, id]
     this.setState({lists});
-   
-
-
 
     //add to allCards object
     let newCardObject = {id: newCard.id, title: newCard.title, content: newCard.content}
@@ -77,7 +74,32 @@ newRandomCard = listId => {
     this.setState({allCards});
 
   }
+
+  omit(obj, keyToOmit) {
+    return Object.entries(obj).reduce(
+      (newObj, [key, value]) =>
+          key === keyToOmit ? newObj : {...newObj, [key]: value},
+      {}
+    );
+  }
   
+  clickDelete = cardId => {
+  //   const {lists, allCards} = this.state.store;
+  //   const newLists = lists.map(list => ({
+  //     ...list, 
+  //     cardIds: list.cardIds.filter(id => id !== cardId)
+  //   }));
+  //     const newCards = this.omit(allCards, cardId);
+  //     this.setState({
+  //       store: {
+  //         lists: newLists,
+  //         allCards: newCards
+  //       }
+  //     })
+  // };
+
+  
+
 
   render() {
     console.log(this.state.lists.cardIds)
@@ -95,6 +117,7 @@ newRandomCard = listId => {
               header={list.header}
               cards={list.cardIds.map(id => this.state.allCards[id])}
               makeNewRandomCard={this.newRandomCard}
+              clickDelete={this.clickDelete}
             />
           ))}
         </div>
